@@ -4,7 +4,9 @@ const UserSchema = new mongoose.Schema({
   password: String,
   email: {
     type: String,
-    index: { unique: true },
+    unique: true,
+    required: true, 
+    match: /.+\@.+\..+/ 
   },
   role: String,
 });

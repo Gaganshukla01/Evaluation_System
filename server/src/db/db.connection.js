@@ -1,19 +1,16 @@
 const mongoose = require('mongoose');
-const URl=process.env.ConnectionUrl
+const URI=process.env.ConnectionUrl
+const connectDB = async () => {
+    try {
+        await mongoose.connect(URI, {
+            useNewUrlParser: true,
+            useUnifiedTopology: true,
+        });
+        console.log('MongoDB connected');
+    } catch (error) {
+        console.error('MongoDB connection error:', error);
+        process.exit(1);
+    }
+};
 
-// Establish the connection
-mongoose.connect(URl)
-    .then(() => {
-        console.log('Connected to MongoDB');
-    })
-    .catch((error) => {
-        console.error('Error connecting to MongoDB:', error.message);
-        // Handle specific error conditions
-        if (error.name === 'MongoNetworkError') {
-            console.error('Network error occurred. Check your MongoDB server.');
-        } else if (error.name === 'MongooseServerSelectionError') {
-            console.error('Server selection error. Ensure MongoDB is running and accessible.');
-        } else {
-            console.error('An unexpected error occurred:', error);
-        }
-    });
+module.exports = connectDB;

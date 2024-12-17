@@ -1,7 +1,9 @@
 require('dotenv').config();
-const connectDB = require("./db/db.connection");
+const cors=require("cors")
+const connectDB = require('./db/db.connection');
 const express = require('express');
-const userRoute = require("./routes/userRoute");
+const userRoute = require('./routes/userRoute');
+const adminRoute = require('./routes/adminRoute');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -12,10 +14,12 @@ connectDB();
 // Middleware
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.use(cors())
 
-// Routes
-app.use("/api/users", userRoute);
+//Routes
+app.use('/api/users', userRoute);
+app.use('/api/admin', adminRoute);
 
 app.listen(PORT, () => {
-    console.log(`Server is running on port ${PORT}`);
+  console.log(`Server is running on port ${PORT}`);
 });

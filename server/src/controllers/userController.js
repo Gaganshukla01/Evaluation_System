@@ -1,14 +1,17 @@
 const User = require('../model/user.model');
 const Evaluation = require('../model/feedback.model');
+const Employee = require('../model/employee.model')
 const bcrypt = require('bcryptjs');
 
 // for registring user
 const userRegister = async (req, res) => {
   const { username, email, password, role } = req.body;
-
   try {
+    const lastEmployeeID = await getLastID();
+    const newEmployeeID = lastEmployeeID + 1;
+
     const hashPassword = await bcrypt.hash(password, 10);
-    const newUser = new User({ username, email, password: hashPassword, role });
+    const newUser = new User({ id: newEmployeeID, username, email, password: hashPassword, role });
     await newUser.save();
     res.status(201).send('User Registered Sucesfully');
   } catch (error) {
@@ -31,5 +34,16 @@ const userLogin = async (req, res) => {
   }
   res.status(201).send('Success');
 };
+
+//Last ID From database
+const getLastID = async () => {
+  try {
+    const lastEmployee = await User.findOne().sort({ id: -1 });
+    return lastEmployee ? lastEmployee.id : 100;
+  } catch (error) {
+    console.error('Error', error);
+    throw error;
+  }
+}
 
 module.exports = { userRegister, userLogin };

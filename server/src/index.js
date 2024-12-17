@@ -1,5 +1,6 @@
 require('dotenv').config();
-const connectDB = require('./db/db.connection');
+const cors = require('cors');
+const connectDB = require("./db/db.connection");
 const express = require('express');
 const userRoute = require("./routes/userRoute");
 const adminRoute = require("./routes/adminRoute");
@@ -13,8 +14,9 @@ connectDB();
 // Middleware
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-
-//User Routes
+app.use(cors());
+    
+//User Routes   
 app.use("/api/users", userRoute);
 
 //Admin Routes

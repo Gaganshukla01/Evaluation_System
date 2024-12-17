@@ -1,5 +1,5 @@
 require('dotenv').config();
-const connectDB = require("./db/db.connection");
+const connectDB = require('./db/db.connection');
 const express = require('express');
 const userRoute = require("./routes/userRoute");
 const adminRoute = require("./routes/adminRoute");
@@ -21,5 +21,5 @@ app.use("/api/users", userRoute);
 app.use("/api/admin", adminRoute);
 
 app.listen(PORT, () => {
-    console.log(`Server is running on port ${PORT}`);
+  console.log(`Server is running on port ${PORT}`);
 });

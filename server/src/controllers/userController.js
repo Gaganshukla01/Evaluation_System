@@ -44,6 +44,6 @@ const getLastID = async () => {
     console.error('Error', error);
     throw error;
   }
-}
+};
 
 module.exports = { userRegister, userLogin };

@@ -7,7 +7,7 @@ const UserSchema = new mongoose.Schema({
     type: String,
     unique: true,
     required: true,
-    match: /.+\@.+\..+/
+    match: /.+\@.+\..+/,
   },
   role: String,
 });

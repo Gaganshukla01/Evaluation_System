@@ -5,22 +5,28 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Registration Page</title>
     <link rel="stylesheet" href="style.css">
-    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"> -->
 </head>
 <body>
 
     <div class="wrapper">
         <div class="box">
             <h1>SignUp</h1>
-            <form action="">
+            <form id="signupForm">
                 <input type="text" placeholder="Username" name="username" id="username">
+                <div class="error" id="usernameError"></div>
+                
                 <input type="email" placeholder="Email" name="email" id="email">
+                <div class="error" id="emailError"></div>
+                
                 <input type="password" placeholder="Password" name="password" id="password">
+                <div class="error" id="passwordError"></div>
+                
                 <p>Have an account? <a href="login.html">LogIn</a></p>
-                <button id="btn">SignUp</button>
+                <button type="submit" id="btn">SignUp</button>
             </form>
         </div>
     </div>
 
+    <script src="auth.js"></script>
 </body>
 </html>

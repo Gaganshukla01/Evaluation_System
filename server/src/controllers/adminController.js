@@ -1,25 +1,25 @@
-const Employee = require('../model/employee.model');
+const Employee = require("../model/employee.model");
 
 const addEmployee = async (req, res) => {
-  try {
-    const { empId, name, email, designation } = req.body;
-    const existingEmployee = await Employee.findOne({ empId });
-
-    if (existingEmployee) {
-      return res
-        .status(400)
-        .send('Error: Employee with this empId already exists.');
+    try {
+        const { empId, name, email, designation } = req.body;
+        
+        const newEmployee = new Employee({ empId, name, email, designation });
+        
+        await newEmployee.save();
+        res.status(201).send('Employee Added Successfully');
+    } catch (error) {
+        res.status(400).send("Error In Adding Employee " + error);
     }
+}
 
-    const newEmployee = new Employee({ empId, name, email, designation });
+const displayDetails=async (req,res)=> {
+    try {
+        const employees = await Employee.find({}, 'empId name email').sort({ empId: 1 });
+        res.status(200).json(employees);
+    } catch (error) {
+        res.status(400).send("Error In Fetching Employee Details: " + error);
+    }
+}
 
-    await newEmployee.save();
-
-    res.status(201).send('Employee Added Successfully');
-  } catch (error) {
-    console.error('Error in adding employee:', error);
-    res.status(400).send('Error In Adding Employee: ' + error.message);
-  }
-};
-
-module.exports = { addEmployee };
+module.exports = { addEmployee , displayDetails}

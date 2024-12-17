@@ -6,7 +6,7 @@ async function fetchData() {
             throw new Error('Network response was not ok');
         }
         const data = await response.json(); 
-        console.log('Data received:', data);e
+        console.log('Data received:', data);
         console.log('Stored API Data:', apiData);
     } catch (error) {
         console.error('There was a problem with the fetch operation:', error);

@@ -1,10 +1,10 @@
 const mongoose = require('mongoose');
 
 const EmployeeSchema = new mongoose.Schema({
-  id: {
+  empId: {
     type: Number,
-    unique: true,
     required: true,
+    sparse:true,
   },
   name: {
     type: String,
@@ -12,7 +12,6 @@ const EmployeeSchema = new mongoose.Schema({
   },
   email: {
     type: String,
-    unique: true,
     required: true,
     match: /.+\@.+\..+/
   },

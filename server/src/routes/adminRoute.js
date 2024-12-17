@@ -4,4 +4,4 @@ const router = express.Router();
 
 router.route('/addEmployee').post(addEmployee);
 
-module.exports = router
+module.exports = router;

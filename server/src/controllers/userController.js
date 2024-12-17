@@ -1,26 +1,21 @@
 const User = require('../model/user.model');
 const Evaluation = require('../model/feedback.model');
-const Employee = require('../model/employee.model');
 const bcrypt = require('bcryptjs');
+const { error } = require('console');
 
 // for registring user
 const userRegister = async (req, res) => {
   const { username, email, password, role } = req.body;
   try {
-    const lastEmployeeID = await getLastID();
-    const newEmployeeID = lastEmployeeID + 1;
+    const lastUserID = await getLastID();
+    const newUserID = lastUserID + 1;
+
     const hashPassword = await bcrypt.hash(password, 10);
-    const newUser = new User({
-      id: newEmployeeID,
-      username,
-      email,
-      password: hashPassword,
-      role,
-    });
+    const newUser = new User({ id: newUserID, username, email, password: hashPassword, role });
     await newUser.save();
     res.status(201).send('User Registered Sucesfully');
   } catch (error) {
-    res.status(400).send('Error on registring user!!' + error.message);
+    res.status(400).send('Error on registring user!! ' + error.message);
   }
 };
 
@@ -43,8 +38,8 @@ const userLogin = async (req, res) => {
 //Last ID From database
 const getLastID = async () => {
   try {
-    const lastEmployee = await User.findOne().sort({ id: -1 });
-    return lastEmployee ? lastEmployee.id : 100;
+    const lastUser = await User.findOne().sort({ id: -1 });
+    return lastUser ? lastUser.id : 100;
   } catch (error) {
     console.error('Error', error);
     throw error;

@@ -15,6 +15,10 @@ const EmployeeSchema = new mongoose.Schema({
     unique: true,
     required: true,
     match: /.+\@.+\..+/
+  },
+  designation: {
+    type: String,
+    required: true
   }
 }, {
   timestamps: true

@@ -1,6 +1,6 @@
 const User = require('../model/user.model');
 const Evaluation = require('../model/feedback.model');
-const Employee = require('../model/employee.model')
+const Employee = require('../model/employee.model');
 const bcrypt = require('bcryptjs');
 
 // for registring user
@@ -9,9 +9,14 @@ const userRegister = async (req, res) => {
   try {
     const lastEmployeeID = await getLastID();
     const newEmployeeID = lastEmployeeID + 1;
-
     const hashPassword = await bcrypt.hash(password, 10);
-    const newUser = new User({ id: newEmployeeID, username, email, password: hashPassword, role });
+    const newUser = new User({
+      id: newEmployeeID,
+      username,
+      email,
+      password: hashPassword,
+      role,
+    });
     await newUser.save();
     res.status(201).send('User Registered Sucesfully');
   } catch (error) {
@@ -44,6 +49,6 @@ const getLastID = async () => {
     console.error('Error', error);
     throw error;
   }
-}
+};
 
 module.exports = { userRegister, userLogin };

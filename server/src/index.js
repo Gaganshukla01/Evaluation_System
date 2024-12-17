@@ -1,11 +1,25 @@
-require('dotenv').config('src');
-const db=require("./db/db.connection")
+require('dotenv').config();
+const connectDB = require('./db/db.connection');
 const express = require('express');
-const mongoose = require('mongoose');
+const userRoute = require("./routes/userRoute");
+const adminRoute = require("./routes/adminRoute");
 
 const app = express();
-const PORT = process.env.PORT;
+const PORT = process.env.PORT || 3000;
 
-app.listen(PORT, err => {
-  console.log(`PORT IS Running on ${PORT}`);
+// Connect to the database
+connectDB();
+
+// Middleware
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+
+//User Routes
+app.use("/api/users", userRoute);
+
+//Admin Routes
+app.use("/api/admin", adminRoute);
+
+app.listen(PORT, () => {
+  console.log(`Server is running on port ${PORT}`);
 });

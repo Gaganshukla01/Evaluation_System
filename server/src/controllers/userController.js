@@ -11,7 +11,13 @@ const userRegister = async (req, res) => {
     const newUserID = lastUserID + 1;
 
     const hashPassword = await bcrypt.hash(password, 10);
-    const newUser = new User({ id: newUserID, username, email, password: hashPassword, role });
+    const newUser = new User({
+      id: newUserID,
+      username,
+      email,
+      password: hashPassword,
+      role,
+    });
     await newUser.save();
     res.status(201).send('User Registered Sucesfully');
   } catch (error) {
@@ -37,11 +43,11 @@ const userRegister = async (req, res) => {
 // };
 
 const userLogin = async (req, res) => {
-  const { email , password } = req.body;
+  const { email, password } = req.body;
 
   // console.log(email);
   const user = await User.findOne({ email });
-  
+
   if (!user) {
     return res.status(400).send('User  not found');
   }

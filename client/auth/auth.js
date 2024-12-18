@@ -1,5 +1,5 @@
 document.getElementById('signupForm').addEventListener('submit', async function(event) {
-    event.preventDefault(); // Prevent the default form submission
+    event.preventDefault(); 
 
     // Clear previous error messages
     document.getElementById('emailError').textContent = '';

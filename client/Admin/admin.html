@@ -4,24 +4,23 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin Pannel..</title>
+    <title>Admin Panel</title>
     <link rel="stylesheet" href="./admin.css">
 </head>
 
 <body>
-    <div id="admin-cointainer">
-        <div id="search">
-                <input type="search" id="search-bar" placeholder="Search">
-        </div>
-        
+
+    <div id="search">
+        <input type="search" id="search-bar" placeholder="Search by name..." oninput="filterCards()">
+    </div>
+    <div id="container">
         <div id="main">
             <div id="data"></div>
         </div>
 
-        <a href="#">
-            <button id="btn" onclick="showCard()">Back</button>
-        </a>
-
+        <!-- <a href="#">
+            <button id="btn">Back</button>
+        </a> -->
     </div>
     <script src="./admin.js"></script>
 </body>

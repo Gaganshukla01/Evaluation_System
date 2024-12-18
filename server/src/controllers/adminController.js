@@ -43,4 +43,4 @@ const getLastID = async () => {
   }
 };
 
-module.exports = { addEmployee }
+module.exports = { addEmployee,displayDetails}

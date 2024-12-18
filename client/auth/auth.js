@@ -11,6 +11,7 @@ document
     const username = document.getElementById("username").value;
     const email = document.getElementById("email").value;
     const password = document.getElementById("password").value;
+    const id = document.getElementById("id").value;
 
     let isValid = true;
 
@@ -36,6 +37,7 @@ document
 
     // Create the data object
     const data = {
+      id: id,
       username: username,
       email: email,
       password: password,
@@ -58,11 +60,10 @@ document
       if (response.ok) {
         modal.style.display = "block";
         console.log("Success:");
-      } 
+      }
       else {
         alert("Registarion Failed..")
         console.error("Error:", error);
-       
       }
     } catch (error) {
       console.error("Error:", error);

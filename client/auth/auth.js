@@ -1,6 +1,4 @@
-document
-  .getElementById("signupForm")
-  .addEventListener("submit", async function (event) {
+document.getElementById('signupForm').addEventListener('submit', async function(event) {
     event.preventDefault(); // Prevent the default form submission
 
     // Clear previous error messages

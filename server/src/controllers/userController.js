@@ -8,7 +8,7 @@ const userRegister = async (req, res) => {
   try {
     const hashPassword = await bcrypt.hash(password, 10);
     const newUser = new User({
-      id,
+      id: newUserID,
       username,
       email,
       password: hashPassword,
@@ -22,17 +22,36 @@ const userRegister = async (req, res) => {
 };
 
 // for user login
-const userLogin = async (req, res) => {
-  const { username, password } = req.body;
+// const userLogin = async (req, res) => {
+//   const { username, password } = req.body;
 
-  const user = await User.findOne({ username });
+//   const user = await User.findOne({ username });
+//   if (!user) {
+//     return res.status(400).send('User  not found');
+//   }
+
+//   const isMatch = await bcrypt.compare(password, user.password);
+//   if (!isMatch) {
+//     // return res.status(400).send('Invalid Password');
+//     return res.status(400).send({ message: 'Invalid username or password' });
+//   }
+//   res.status(201).send('Success');
+// };
+
+const userLogin = async (req, res) => {
+  const { email, password } = req.body;
+
+  // console.log(email);
+  const user = await User.findOne({ email });
+
   if (!user) {
     return res.status(400).send('User  not found');
   }
 
   const isMatch = await bcrypt.compare(password, user.password);
   if (!isMatch) {
-    return res.status(400).send('Invalid Password');
+    // return res.status(400).send('Invalid Password');
+    return res.status(400).send({ message: 'Invalid email or password' });
   }
   res.status(201).send('Success');
 };

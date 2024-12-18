@@ -4,15 +4,20 @@ const bcrypt = require('bcryptjs');
 
 // for registring user
 const userRegister = async (req, res) => {
-  const { username, email, password, role } = req.body;
-
+  const { id, username, email, password, role } = req.body;
   try {
     const hashPassword = await bcrypt.hash(password, 10);
-    const newUser = new User({ username, email, password: hashPassword, role });
+    const newUser = new User({
+      id,
+      username,
+      email,
+      password: hashPassword,
+      role,
+    });
     await newUser.save();
     res.status(201).send('User Registered Sucesfully');
   } catch (error) {
-    res.status(400).send('Error on registring user!!' + error.message);
+    res.status(400).send('Error on registring user!! ' + error.message);
   }
 };
 

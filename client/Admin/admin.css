@@ -1,0 +1,74 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+#search {
+  width: 20%;
+  margin: auto;
+  padding: 2rem;
+}
+#search-bar {
+  padding: 5px;
+  border-radius: 7px;
+  border: 1px solid grey;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+#search-bar:hover {
+  border: 1px solid green;
+  cursor: pointer;
+}
+li {
+  list-style: none;
+  padding: 3px;
+}
+
+.data {
+  margin: 5px;
+  border-radius: 5px;
+  display: block;
+  padding: 15px;
+  width: max-content;
+  justify-items: center;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  background-color: aliceblue;
+}
+div {
+  display: grid;
+  grid-template-columns: auto auto auto auto auto;
+  justify-items: center;
+}
+#main {
+  width: 80%;
+  margin: auto;
+  padding: 1rem;
+}
+
+#main-head {
+  padding: 1rem;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  background: teal;
+  color: black;
+  font-size: 3rem;
+}
+
+#btn {
+  background-color: green;
+  border: 1px solid green;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  padding: 6px;
+  width: 6rem;
+  border-radius: 1rem;
+  font-weight: 700;
+  color: white;
+  bottom: 0;
+  margin-bottom: 1rem;
+}
+
+#btn:hover {
+  background-color: white;
+  border: 1px solid green;
+  color: black;
+  font-weight: 700;
+  cursor: pointer;
+}

@@ -1,49 +1,3 @@
-// document.getElementById('signupForm').addEventListener('submit', async function(event) {
-//     event.preventDefault(); // Prevent the default form submission
-
-//     // Get the values from the form
-//     const username = document.getElementById('username').value;
-//     const email = document.getElementById('email').value;
-//     const password = document.getElementById('password').value;
-
-//     // Create the data object
-//     const data = {
-//         username: username,
-//         email: email,
-//         password: password,
-//         role:"TP"
-//     };
-//     console.log(data);
-
-//     try {
-//         // Send a POST request to the API
-//         const response = await fetch('http://localhost:8080/api/users/register', {
-//             method: 'POST',
-//             headers: {
-//                 'Content-Type': 'application/json'
-//             },
-//             body: JSON.stringify(data)
-//         });
-
-//         console.log('Response status:', response.status); 
-
-//         if (response.ok) {
-//             const result = await response.json();
-//             console.log('Success:', result);
-//             window.location.href = 'login.html';
-//         } else {
-//             const error = await response.json();
-//             console.error('Error:', error);
-//             alert('Registration failed: ' + error.message);
-//         }
-//     } catch (error) {
-//         console.error('Error:', error);
-//     }
-// });
-
-
-
-
 document.getElementById('signupForm').addEventListener('submit', async function(event) {
     event.preventDefault(); // Prevent the default form submission
 
@@ -107,5 +61,58 @@ document.getElementById('signupForm').addEventListener('submit', async function(
         }
     } catch (error) {
         console.error('Error:', error);
+    }
+});
+
+
+
+
+document.getElementsByClassName('btn').addEventListener('click', async function(event) {
+    event.preventDefault(); // Prevent default form submission
+
+    // Get email and password from input fields
+    const email = document.getElementById('email').value;
+    const password = document.getElementById('password').value;
+
+    // Basic validation
+    if (!email || !password) {
+        alert('Please enter both email and password');
+        return;
+    }
+
+    // Create data object for login
+    const loginData = {
+        email: email,
+        password: password
+    };
+
+    try {
+        // Send login request to API
+        const response = await fetch('http://localhost:8080/api/users/login', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(loginData)
+        });
+
+        // Check response
+        if (response.ok) {
+            // Successful login
+            const result = await response.json();
+            
+            // Optional: Store user data in localStorage if needed
+            localStorage.setItem('userData', JSON.stringify(result));
+            
+            // Redirect to home page
+            window.location.href = 'signup.html';
+        } else {
+            // Login failed
+            const errorData = await response.text(); // Changed from .json()
+            alert(errorData || 'Login failed');
+        }
+    } catch (error) {
+        console.error('Login error:', error);
+        alert('An error occurred during login');
     }
 });

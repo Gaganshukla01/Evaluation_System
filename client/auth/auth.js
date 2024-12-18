@@ -48,6 +48,8 @@ document.getElementById('signupForm').addEventListener('submit', async function(
             body: JSON.stringify(data)
         });
 
+        console.log(response)
+
         console.log('Response status:', response.status); 
         window.location.href = 'login.html';
         

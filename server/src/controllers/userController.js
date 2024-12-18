@@ -1,7 +1,6 @@
 const User = require('../model/user.model');
 const Evaluation = require('../model/feedback.model');
 const bcrypt = require('bcryptjs');
-const { error } = require('console');
 
 // for registring user
 const userRegister = async (req, res) => {
@@ -9,9 +8,14 @@ const userRegister = async (req, res) => {
   try {
     const lastUserID = await getLastID();
     const newUserID = lastUserID + 1;
-
     const hashPassword = await bcrypt.hash(password, 10);
-    const newUser = new User({ id: newUserID, username, email, password: hashPassword, role });
+    const newUser = new User({
+      id: newUserID,
+      username,
+      email,
+      password: hashPassword,
+      role,
+    });
     await newUser.save();
     res.status(201).send('User Registered Sucesfully');
   } catch (error) {
@@ -44,6 +48,6 @@ const getLastID = async () => {
     console.error('Error', error);
     throw error;
   }
-}
+};
 
 module.exports = { userRegister, userLogin };

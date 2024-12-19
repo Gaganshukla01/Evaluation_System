@@ -26,7 +26,12 @@ document
       console.log("Response status:", response.status);
 
       if (response.ok) {
-        window.location.href = "./home.html";
+        const result = await response.json();
+        if (result.redirect === 'admin') {
+          window.location.href = "../Admin/admin.html";
+        } else {
+          window.location.href = "../User/user.html"; 
+        }
       } else {
         const error = await response.json();
         alert("Login failed: " + error.message);

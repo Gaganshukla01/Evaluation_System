@@ -1,28 +1,33 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin Panel</title>
-    <link rel="stylesheet" href="./user.css">
+    <title>Employee Details</title>
+    <link rel="stylesheet" href="user.css">
 </head>
-
 <body>
-
-    <div id="search">
-        <input type="search" id="search-bar" placeholder="Search by name..." oninput="filterCards()">
+    <nav>
+        <h2>Management System</h2>
+        <a href="../auth/login.html" id="logout">Logout</a>
+    </nav>
+    
+    <div class="container">
+        <h1>Employee Details</h1>
+        <input type="text" id="searchInput" placeholder="Search by name..." />
+        <table id="employeeTable">
+            <thead>
+                <tr>
+                    <th>Employee ID</th>
+                    <th>Name</th>
+                    <th>Email</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- DATA will come here -->
+            </tbody>
+        </table>
     </div>
-    <div id="container">
-        <div id="main">
-            <div id="data"></div>
-        </div>
-
-        <!-- <a href="#">
-            <button id="btn">Back</button>
-        </a> -->
-    </div>
-    <script src="./user.js"></script>
+    <script src="user.js"></script>
 </body>
-
 </html>

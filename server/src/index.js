@@ -21,6 +21,9 @@ app.use("/api/users", userRoute);
  
 //Admin Routes
 app.use("/api/admin", adminRoute);
+
+//feedback Routes
+app.use("/api/users",userRoute);
  
 app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);

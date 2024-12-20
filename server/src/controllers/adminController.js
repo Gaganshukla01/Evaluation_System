@@ -28,4 +28,3 @@ const displayDetails=async (req,res)=> {
 }
 
 module.exports = { addEmployee , displayDetails}
-

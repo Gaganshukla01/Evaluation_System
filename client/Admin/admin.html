@@ -33,7 +33,7 @@
 .close {
     position: absolute;
     right: 1.5rem;
-    top: 1rem;
+    top: 2rem;
     font-size: 1.5rem;
     font-weight: bold;
     color: #666;
@@ -120,7 +120,8 @@ button[type="submit"]:hover {
         transform: translateY(0);
         opacity: 1;
     }
-}    </style>
+}    
+</style>
 </head>
 <body>
     <nav>
@@ -150,15 +151,12 @@ button[type="submit"]:hover {
         <div class="modal-content">
             <span class="close">&times;</span>
             <h2>Add Employee</h2>
-            <form id="employeeForm">
-                <label for="employeeId">Employee ID:</label>
-                <input type="text" id="employeeId" required>
-                <br>
+            <form id="employeeForm" >
                 <label for="employeeName">Name:</label>
-                <input type="text" id="employeeName" required>
+                <input type="text" id="employeeName" name="empName" required>
                 <br>
-                <label for="employeeName">Employee mails id:</label>
-                <input type="email" id="empmail" required>
+                <label for="employeeEmail">Employee email Id:</label>
+                <input type="email" id="empmail" name="empEmail" required>
                 <br>
                 <button type="submit">Submit</button>
             </form>
@@ -166,39 +164,5 @@ button[type="submit"]:hover {
     </div>
 
     <script src="admin.js"></script>
-    <script>
-        // JavaScript to handle modal functionality
-        document.getElementById('addEmployeeBtn').addEventListener('click', function() {
-            document.getElementById('modal').style.display = 'block';
-        });
-
-        document.querySelector('.close').addEventListener('click', function() {
-            // Hide the modal
-            document.getElementById('modal').style.display = 'none';
-        });
-
-        window.addEventListener('click', function(event) {
-            if (event.target === document.getElementById('modal')) {
-                // Hide the modal if the user clicks outside of it
-                document.getElementById('modal').style.display = 'none';
-                document.body.classList.remove('blur');
-            }
-        });
-
-        document.getElementById('employeeForm').addEventListener('submit', function(event) {
-            event.preventDefault(); // Prevent form submission
-
-            // Get form values
-            const employeeId = document.getElementById('employeeId').value;
-            const employeeName = document.getElementById('employeeName').value;
-
-            console.log('Employee ID:', employeeId);
-            console.log('Employee Name:', employeeName);
-
-            // Close modal 
-            document.getElementById('modal').style.display = 'none';
-            document.body.class; List.remove('blur');
-        });
-    </script>
 </body>
 </html>

@@ -1,6 +1,6 @@
 require('dotenv').config();
-const cors=require("cors")
-const connectDB = require('./db/db.connection');
+const cors = require('cors');
+const connectDB = require("./db/db.connection");
 const express = require('express');
 const userRoute = require('./routes/userRoute');
 const adminRoute = require('./routes/adminRoute');
@@ -14,11 +14,13 @@ connectDB();
 // Middleware
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.use(cors())
+app.use(cors());
+    
+//User Routes   
+app.use("/api/users", userRoute);
 
-//Routes
-app.use('/api/users', userRoute);
-app.use('/api/admin', adminRoute);
+//Admin Routes
+app.use("/api/admin", adminRoute);
 
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);

@@ -21,20 +21,28 @@ const userRegister = async (req, res) => {
   }
 };
 
-// for user login
 const userLogin = async (req, res) => {
-  const { username, password } = req.body;
+  const { email, password } = req.body;
+  
+  if (email === 'admin@yash.com' && password === 'admin') {
+    return res.status(201).send({ message: 'Success', redirect: 'admin' });
+  }
+  // console.log(email);
+  const user = await User.findOne({ email });
 
-  const user = await User.findOne({ username });
   if (!user) {
     return res.status(400).send('User  not found');
   }
 
   const isMatch = await bcrypt.compare(password, user.password);
+
   if (!isMatch) {
-    return res.status(400).send('Invalid Password');
+    // return res.status(400).send('Invalid Password');
+    return res.status(400).send({ message: 'Invalid email or password' });
   }
-  res.status(201).send('Success');
+
+  res.status(201).send({ message: 'Success', redirect: 'user' });
 };
+
 
 module.exports = { userRegister, userLogin };

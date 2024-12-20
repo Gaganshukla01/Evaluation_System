@@ -1,6 +1,4 @@
-document
-  .getElementById("signupForm")
-  .addEventListener("submit", async function (event) {
+document.getElementById('signupForm').addEventListener('submit', async function(event) {
     event.preventDefault(); // Prevent the default form submission
 
     // Clear previous error messages
@@ -11,6 +9,7 @@ document
     const username = document.getElementById("username").value;
     const email = document.getElementById("email").value;
     const password = document.getElementById("password").value;
+    const id = document.getElementById("id").value;
 
     let isValid = true;
 
@@ -28,6 +27,8 @@ document
       document.getElementById("passwordError").textContent =
         "Password must be at least 8 characters long and include at least one uppercase letter, one lowercase letter, one number, and one special character.";
       isValid = false; // Mark as invalid
+    }else if(password ==='admin'){
+      isValid = true
     }
 
     if (!isValid) {
@@ -36,6 +37,7 @@ document
 
     // Create the data object
     const data = {
+      id: id,
       username: username,
       email: email,
       password: password,
@@ -58,11 +60,10 @@ document
       if (response.ok) {
         modal.style.display = "block";
         console.log("Success:");
-      } 
+      }
       else {
         alert("Registarion Failed..")
         console.error("Error:", error);
-       
       }
     } catch (error) {
       console.error("Error:", error);

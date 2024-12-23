@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Employee Details</title>
+    <link rel="stylesheet" href="empDetails.css">
+</head>
+<body>
+    <nav>
+        <h2>Evaluation Management System</h2>
+        <a href="../auth/login.html" id="logout">Logout</a>
+    </nav>
+    <div class="container">
+        <h1 id="employeeNameHeader">Employee Name</h1>
+        <input type="text" id="searchInput" placeholder="Search by (this feature is comming soon)..." />
+        <button id="addEmployeeBtn">Add Feedback</button>
+        <table id="employeeTable">
+            <thead>
+                <tr>
+                    <th>Interviewer</th>
+                    <th>Rating</th>
+                    <th>Interview type</th>
+                    <th>Feedback</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- DATA will come here -->  
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Modal for adding employee -->
+    <div id="modal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Add Employee</h2>
+            <form id="employeeForm">
+                <!-- <label for="employeeId">Employee ID:</label> -->
+                <input type="text" id="employeeId" name="forEmployee" placeholder="enter employee name" required>
+                <br>
+                <!-- <label for="employeeName">Name:</label> -->
+                <input type="text" id="employeeName" name="fromuser" placeholder="enter Interviewer name" required>
+                <br>
+                <!-- <label for="employeeName">Employee mails id:</label> -->
+                <select id="rating" name="rating" required>
+                    <option value="" disabled selected>Select your rating</option>
+                    <option value="1">Begeneer</option>
+                    <option value="2">Intermediate</option>
+                    <option value="3">Advance</option>
+                </select>
+                <br>
+                <select id="interviewType" name="interviewType" required>
+                    <option value="" disabled selected>Select Interview Type</option>
+                    <option value="internal">Internal Interview</option>
+                    <option value="external">External Interview</option>
+                </select>
+                <br>
+                <input type="text" id="text" placeholder="Technical Skills" name="tech">
+                <br>
+                <input type="email" id="text" placeholder="feedback" name="feedback" required>
+                <br>
+                <button type="submit">Submit</button>
+            </form>
+        </div>
+    </div>
+
+    <script src="empDetails.js"></script>
+
+</body>
+</html>

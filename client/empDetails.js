@@ -38,12 +38,6 @@ document.getElementById('employeeForm').addEventListener('submit', function(even
 
 
 
-
-
-
-
-
-
 document.addEventListener('DOMContentLoaded', () => {
     // Get the URL parameters
     const urlParams = new URLSearchParams(window.location.search);
@@ -52,6 +46,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Set the employee name in the header
     if (employeeName) {
         document.getElementById('employeeNameHeader').textContent = employeeName;
+        document.getElementById('employeeNameInput').value = employeeName; // Pre-fill the input field
     }
 
     // The rest of your existing code...

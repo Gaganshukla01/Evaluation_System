@@ -61,17 +61,48 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
 
-        document.getElementById('employeeForm').addEventListener('submit', function(event) {
+        document.getElementById('employeeForm').addEventListener('submit', async function(event) {
             event.preventDefault(); // Prevent form submission
 
             // Get form values
-            const employeeId = document.getElementById('employeeId').value;
-            const employeeName = document.getElementById('employeeName').value;
+            const name = document.getElementById('empName').value;
+            const email = document.getElementById('empEmail').value;
 
-            console.log('Employee ID:', employeeId);
-            console.log('Employee Name:', employeeName);
+            // console.log('Employee Name:', name);
+            // console.log('Employee Email:', email);
 
-            // Close modal 
-            document.getElementById('modal').style.display = 'none';
-            document.body.class; List.remove('blur');
+            const data = {
+                name: name,
+                email: email,
+                designation:'Trainee Programmer'
+              };
+
+            console.log(data);
+
+            try {
+                // Send a POST request to the API
+                const response = await fetch("http://localhost:8080/api/admin/addEmployee", {
+                  method: "POST",
+                  headers: {
+                    "Content-Type": "application/json",
+                  },
+                  body: JSON.stringify(data),
+                });
+                console.log(response);
+          
+                console.log("Response status:", response.status);
+          
+                if (response.ok) {
+                    const result = await response.json();
+                    // Close modal 
+                    document.getElementById('modal').style.display = 'none';
+                    window.location.href = "../Admin/admin.html";
+                } else {
+                  const error = await response.json();
+                  alert("Failed: " + error.message);
+                }
+              } catch (error) {
+                console.error("Error:", error);
+                alert("Failed to add");
+              }
         });

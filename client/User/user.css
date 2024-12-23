@@ -6,11 +6,7 @@
 }
 
 .container {
-  /* border: 2px solid red; */
-  /* max-width: 800px; */
-  /* height: fit-content; */
   margin: auto;
-  /* width: fit-content; */
   background: white;
   padding: 20px;
   border-radius: 8px;
@@ -27,8 +23,6 @@ table {
   width: 100%;
   border-collapse: collapse;
   margin-top: 20px;
-  /* border: 2px solid red; */
-  /* height: 700px; */
 }
 
 th, td {
@@ -45,15 +39,6 @@ th {
 tr:hover {
   background-color: #f1f1f1;
 }
-
-
-
-
-
-
-
-
-
 
 /* Navbar styles */
 nav {
@@ -90,4 +75,38 @@ nav a:hover {
   margin-top: 20px;
   border: 1px solid #ddd;
   border-radius: 4px;
+}
+
+
+
+/* Add these styles to your existing CSS */
+.view-details-btn {
+  background-color: #4b6cb7;
+  color: white;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.view-details-btn:hover {
+  background-color: #3a5a9f;
+}
+
+/* Update your existing table styles to accommodate the new button */
+td {
+  padding: 12px;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+  background-color: inherit;
+}
+
+/* Fix button background */
+td .view-details-btn {
+  background-color: #4b6cb7;
+}
+
+td .view-details-btn:hover {
+  background-color: #3a5a9f;
 }

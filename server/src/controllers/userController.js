@@ -44,5 +44,22 @@ const userLogin = async (req, res) => {
   res.status(201).send({ message: 'Success', redirect: 'user' });
 };
 
+const feedbackController = async (req, res) => {
+  const { forEmployee, fromuser, rating, interviewType, feedback, technology } = req.body;
 
-module.exports = { userRegister, userLogin };
+  try {
+    const newFeedback = new Evaluation({
+      forEmployee,
+      fromuser,
+      rating,
+      interviewType,
+      feedback,
+      technology,
+    });
+    await newFeedback.save();
+    res.status(201).send('Thankyou For your Feedback');
+  } catch (error) {
+    res.status(400).send('Error on Giving Feedback !! ' + error.message);
+  }
+};
+module.exports = { userRegister, userLogin, feedbackController };

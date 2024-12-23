@@ -1,9 +1,12 @@
 const mongoose = require('mongoose');
 const FeedbackSchema = new mongoose.Schema({
-  foruser: String,
+  forEmployee: String,
   fromuser: String,
-  rating: Number,
+  rating: String,
+  interviewType: String,
   feedback: String,
+  technology: String
+  
 });
 
 module.exports = mongoose.model('Evaluation', FeedbackSchema);

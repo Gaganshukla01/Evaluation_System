@@ -1,6 +1,7 @@
 const User = require('../model/user.model');
 const Evaluation = require('../model/feedback.model');
 const bcrypt = require('bcryptjs');
+const feedbackModel = require('../model/feedback.model');
 
 // for registring user
 const userRegister = async (req, res) => {
@@ -62,4 +63,31 @@ const feedbackController = async (req, res) => {
     res.status(400).send('Error on Giving Feedback !! ' + error.message);
   }
 };
-module.exports = { userRegister, userLogin, feedbackController };
+
+
+
+const displayFeedback = async (req, res) => {
+  // Access fromuser directly from req.body (if needed)
+  const fromUser  = req.body.fromuser;
+  console.log(fromUser ); // This should print the value of fromuser
+
+  try {
+    // Fetch and sort feedback based on forEmployee
+    const feedback = await feedbackModel.find({}, 'forEmployee fromuser rating interviewType feedback').sort({
+      forEmployee: 1, // 1 for ascending order, -1 for descending order
+    });
+    console.log(feedback);
+    
+    
+    // Send the sorted feedback as a response
+    res.status(200).json(feedback);
+  } catch (error) {
+    res.status(400).send('Error In Fetching Employee Feedback: ' + error);
+  }
+};
+
+
+
+
+
+module.exports = { userRegister, userLogin, feedbackController, displayFeedback };

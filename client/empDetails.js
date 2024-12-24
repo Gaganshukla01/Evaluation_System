@@ -97,7 +97,7 @@ employeeForm.addEventListener('submit', function(event) {
     .then(data => {
         console.log('Success:', data); // Handle success
         // Optionally, you can reset the form or show a success message
-        window.location.href = "empDetails.html";
+        window.location.href = "empDetails.html?name=${employee.name}";
         employeeForm.reset();
     })
     .catch(error => {
@@ -105,3 +105,57 @@ employeeForm.addEventListener('submit', function(event) {
         console.log("nhi hua, in error block");
     });
 });
+
+
+
+
+
+  // fetching data from feedback api
+
+  // Function to fetch feedback data and populate the table
+const fetchFeedbackData = async () => {
+  try {
+      const response = await fetch('http://localhost:8080/api/users/feedbackDetails');
+      
+      // Check if the response is OK (status code 200)
+      if (!response.ok) {
+          throw new Error('Network response was not ok');
+      }
+
+      const feedbackData = await response.json(); // Parse the JSON response
+
+      // Get the table body element
+      const tbody = document.querySelector('#employeeTable tbody');
+      tbody.innerHTML = ''; // Clear any existing rows
+
+      // Populate the table with feedback data
+      feedbackData.forEach(feedback => {
+          const row = document.createElement('tr'); // Create a new table row
+
+          // Create and append cells for each piece of feedback data
+          const interviewerCell = document.createElement('td');
+          interviewerCell.textContent = feedback.fromuser; // Assuming fromuser is the interviewer's name
+          row.appendChild(interviewerCell);
+
+          const ratingCell = document.createElement('td');
+          ratingCell.textContent = feedback.rating; // Assuming rating is a number or string
+          row.appendChild(ratingCell);
+
+          const interviewTypeCell = document.createElement('td');
+          interviewTypeCell.textContent = feedback.interviewType; // Assuming interviewType is a string
+          row.appendChild(interviewTypeCell);
+
+          const feedbackCell = document.createElement('td');
+          feedbackCell.textContent = feedback.feedback; // Assuming feedback is a string
+          row.appendChild(feedbackCell);
+
+          // Append the row to the table body
+          tbody.appendChild(row);
+      });
+  } catch (error) {
+      console.error('Error fetching feedback data:', error);
+  }
+};
+
+// Call the function to fetch data when the page loads
+document.addEventListener('DOMContentLoaded', fetchFeedbackData);

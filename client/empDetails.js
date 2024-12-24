@@ -27,8 +27,8 @@ document
     const employeeId = document.getElementById("employeeId").value;
     const employeeName = document.getElementById("employeeName").value;
 
-    console.log("Employee ID:", employeeId);
-    console.log("Employee Name:", employeeName);
+    // console.log("Employee ID:", employeeId);
+    // console.log("Employee Name:", employeeName);
 
     // Close modal
     document.getElementById("modal").style.display = "none";
@@ -95,14 +95,15 @@ employeeForm.addEventListener('submit', function(event) {
         }
     })
     .then(data => {
-        console.log('Success:', data); // Handle success
+        // console.log('Success:', data); // Handle success
         // Optionally, you can reset the form or show a success message
-        window.location.href = "empDetails.html?name=${employee.name}";
+        // window.location.href = "empDetails.html?name=${employee.name}";
+        window.location.reload();
         employeeForm.reset();
     })
     .catch(error => {
         console.error('Error:', error); // Handle error
-        console.log("nhi hua, in error block");
+        // console.log("nhi hua, in error block");
     });
 });
 
@@ -110,48 +111,57 @@ employeeForm.addEventListener('submit', function(event) {
 
 
 
-  // fetching data from feedback api
 
-  // Function to fetch feedback data and populate the table
 const fetchFeedbackData = async () => {
   try {
-      const response = await fetch('http://localhost:8080/api/users/feedbackDetails');
-      
-      // Check if the response is OK (status code 200)
-      if (!response.ok) {
-          throw new Error('Network response was not ok');
-      }
+    const urlParams = new URLSearchParams(window.location.search);
+    const forEmployee = urlParams.get("name"); // Get the name from the URL
 
-      const feedbackData = await response.json(); // Parse the JSON response
+    console.log("this is in frontene " + forEmployee);
+    
+    // Fetch feedback data from the API
+    const response = await fetch(`http://localhost:8080/api/users/feedbackDetails`);
+    
+    console.log(response);
+    
+    // Check if the response is OK (status code 200)
+    if (!response.ok) {
+        throw new Error('Network response was not ok');
+    }
 
-      // Get the table body element
-      const tbody = document.querySelector('#employeeTable tbody');
-      tbody.innerHTML = ''; // Clear any existing rows
+    const feedbackData = await response.json(); // Parse the JSON response
 
-      // Populate the table with feedback data
-      feedbackData.forEach(feedback => {
-          const row = document.createElement('tr'); // Create a new table row
+    // Filter feedback data based on forEmployee
+    const filteredFeedbackData = feedbackData.filter(feedback => feedback.forEmployee === forEmployee);
 
-          // Create and append cells for each piece of feedback data
-          const interviewerCell = document.createElement('td');
-          interviewerCell.textContent = feedback.fromuser; // Assuming fromuser is the interviewer's name
-          row.appendChild(interviewerCell);
+    // Get the table body element
+    const tbody = document.querySelector('#employeeTable tbody');
+    tbody.innerHTML = ''; // Clear any existing rows
 
-          const ratingCell = document.createElement('td');
-          ratingCell.textContent = feedback.rating; // Assuming rating is a number or string
-          row.appendChild(ratingCell);
+    // Populate the table with filtered feedback data
+    filteredFeedbackData.forEach(feedback => {
+        const row = document.createElement('tr'); // Create a new table row
 
-          const interviewTypeCell = document.createElement('td');
-          interviewTypeCell.textContent = feedback.interviewType; // Assuming interviewType is a string
-          row.appendChild(interviewTypeCell);
+        // Create and append cells for each piece of feedback data
+        const interviewerCell = document.createElement('td');
+        interviewerCell.textContent = feedback.fromuser; // Assuming fromuser is the interviewer's name
+        row.appendChild(interviewerCell);
 
-          const feedbackCell = document.createElement('td');
-          feedbackCell.textContent = feedback.feedback; // Assuming feedback is a string
-          row.appendChild(feedbackCell);
+        const ratingCell = document.createElement('td');
+        ratingCell.textContent = feedback.rating; // Assuming rating is a number or string
+        row.appendChild(ratingCell);
 
-          // Append the row to the table body
-          tbody.appendChild(row);
-      });
+        const interviewTypeCell = document.createElement('td');
+        interviewTypeCell.textContent = feedback.interviewType; // Assuming interviewType is a string
+        row.appendChild(interviewTypeCell);
+
+        const feedbackCell = document.createElement('td');
+        feedbackCell.textContent = feedback.feedback; // Assuming feedback is a string
+        row.appendChild(feedbackCell);
+
+        // Append the row to the table body
+        tbody.appendChild(row);
+    });
   } catch (error) {
       console.error('Error fetching feedback data:', error);
   }

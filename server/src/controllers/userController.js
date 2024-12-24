@@ -66,20 +66,43 @@ const feedbackController = async (req, res) => {
 
 
 
+// const displayFeedback = async (req, res) => {
+//   // Access fromuser directly from req.body (if needed)
+//   const forEmployee  = req.body.forEmployee;
+//   console.log(forEmployee ); // This should print the value of fromuser
+
+//   try {
+//     // Fetch and sort feedback based on forEmployee
+//     const feedback = await feedbackModel.find({}, 'forEmployee forEmployee rating interviewType feedback').sort({
+//       forEmployee: 1, // 1 for ascending order, -1 for descending order
+//     });
+//     // console.log(feedback);
+    
+    
+//     // Send the sorted feedback as a response
+//     res.status(200).json(feedback);
+//   } catch (error) {
+//     res.status(400).send('Error In Fetching Employee Feedback: ' + error);
+//   }
+// };
+
+
+
+
 const displayFeedback = async (req, res) => {
-  // Access fromuser directly from req.body (if needed)
-  const fromUser  = req.body.fromuser;
-  console.log(fromUser ); // This should print the value of fromuser
+  // Access fromuser directly from req.body
+  const forEmployee  = req.body.forEmployee; // Assuming fromuser is sent in the request body
+  console.log(forEmployee ); // This should print the value of fromuser
 
   try {
-    // Fetch and sort feedback based on forEmployee
-    const feedback = await feedbackModel.find({}, 'forEmployee fromuser rating interviewType feedback').sort({
-      forEmployee: 1, // 1 for ascending order, -1 for descending order
+    // Fetch feedback based on fromUser  only
+    const feedback = await feedbackModel.find({  }, 'forEmployee fromuser rating interviewType feedback').sort({
+      forEmployee: 1, // Sort by forEmployee in ascending order
     });
-    console.log(feedback);
+
+    console.log(feedback); // Log the filtered feedback
     
-    
-    // Send the sorted feedback as a response
+    // Send the filtered feedback as a response
     res.status(200).json(feedback);
   } catch (error) {
     res.status(400).send('Error In Fetching Employee Feedback: ' + error);
